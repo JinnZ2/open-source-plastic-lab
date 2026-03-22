@@ -45,6 +45,22 @@ Each week focuses on a system. Each step is fully documented.
 
 ---
 
+##  Python Models
+
+Planning and simulation tools in `models/`, organized by function:
+
+| Module | Purpose |
+|--------|---------|
+| `models/measure/` | Sensor logging, turbidity monitoring, yield tracking |
+| `models/build/` | 30-day build planner, off-grid power calculator |
+| `models/design/` | EC simulator, pyrolysis yield model, flow simulator |
+| `models/materials/` | Cost estimator with salvage discounts, BOM generator |
+| `models/scrap/` | Plastic classifier, scrap valuator, waste stream analyzer |
+
+Run any model with: `python -m models.<category>.<module> --help`
+
+---
+
 ##  Potential Output
 
 | Product           | Daily Output | Est. Value |

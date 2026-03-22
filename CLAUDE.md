@@ -24,6 +24,25 @@ open-source-plastic-lab/
 │   ├── oxidation-reactor-wiring.md        # Advanced oxidation reactor wiring
 │   ├── overview.md                        # Water recovery system summary
 │   └── build-out-materials.md             # Bill of materials with costs
+├── models/                                # Python planning & simulation tools
+│   ├── measure/
+│   │   ├── sensor_logger.py               # Log Arduino sensor data to CSV via serial
+│   │   ├── turbidity_monitor.py           # Analyze turbidity trends and removal efficiency
+│   │   └── yield_tracker.py               # Track daily production output vs targets
+│   ├── build/
+│   │   ├── build_planner.py               # 30-day build schedule tracker with progress
+│   │   └── power_calculator.py            # Off-grid solar/battery sizing calculator
+│   ├── design/
+│   │   ├── ec_simulator.py                # Electrocoagulation physics simulation
+│   │   ├── pyrolysis_model.py             # Temperature/yield modeling by plastic type
+│   │   └── flow_simulator.py              # Water treatment throughput & bottleneck analysis
+│   ├── materials/
+│   │   ├── cost_estimator.py              # Full BOM cost calculator with salvage discounts
+│   │   └── bom_generator.py               # Shopping list generator (text/CSV/markdown)
+│   └── scrap/
+│       ├── plastic_classifier.py          # Identify plastics by code/density/visual cues
+│       ├── scrap_valuator.py              # Estimate value of collected plastic waste
+│       └── waste_stream.py                # Model waste composition by collection source
 └── water_treatment/
     ├── README.md                          # Detailed water treatment guide
     └── controller_code/
@@ -48,10 +67,11 @@ open-source-plastic-lab/
 ## Tech Stack
 
 - **Hardware:** Arduino Uno, Nano, Mega
-- **Language:** Arduino C++ (`.ino` files)
+- **Language:** Arduino C++ (`.ino` files), Python 3 (`models/`)
 - **Communication:** I2C (address `0x16` for master controller)
 - **Sensors:** Turbidity (A0), pH (A1), conductivity (A2), temperature (A3), flow (pin 2)
 - **IDE:** Arduino IDE for compiling and flashing
+- **Python:** Standard library only (no pip dependencies except `pyserial` for sensor_logger)
 - **No build system, linting, or testing framework** — this is a hardware project
 
 ## Arduino Code Conventions
@@ -65,11 +85,32 @@ open-source-plastic-lab/
 - Simple, procedural style — avoid unnecessary abstraction
 - Always include timeout fallbacks for sensor-based stage transitions
 
+## Python Models
+
+Run any model with: `python -m models.<category>.<module> --help`
+
+| Category | Modules | Purpose |
+|----------|---------|---------|
+| `measure` | sensor_logger, turbidity_monitor, yield_tracker | Data logging and measurement |
+| `build` | build_planner, power_calculator | Build scheduling and power sizing |
+| `design` | ec_simulator, pyrolysis_model, flow_simulator | Physics simulations |
+| `materials` | cost_estimator, bom_generator | Cost estimation and shopping lists |
+| `scrap` | plastic_classifier, scrap_valuator, waste_stream | Plastic sorting and valuation |
+
+### Python Conventions
+
+- All models use **standard library only** (except `pyserial` for serial communication)
+- Each module is runnable via `python -m` with `argparse` CLI
+- Data files (CSV, JSON) go in `logs/` (gitignored)
+- Keep models simple and self-contained — no shared state between modules
+- Use `snake_case` for filenames and functions
+
 ## File Naming Convention
 
 - All documentation files use **lowercase kebab-case** with `.md` extension
 - Arduino sketches use **snake_case** with `.ino` extension
-- Directory names use **lowercase** (`Docs/`, `water_treatment/`)
+- Python modules use **snake_case** with `.py` extension
+- Directory names use **lowercase** (`Docs/`, `water_treatment/`, `models/`)
 
 ## Key Entry Points
 
@@ -77,6 +118,7 @@ open-source-plastic-lab/
 - **Quick build:** `Docs/quick-start.md` (electrocoagulation in 1 day)
 - **Water treatment:** `water_treatment/README.md`
 - **Safety:** `Docs/safety.md` (read before any build work)
+- **Python models:** `python -m models.<category>.<module> --help`
 
 ## Build Plan Structure (30 Days)
 

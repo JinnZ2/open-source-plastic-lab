@@ -7,3 +7,14 @@
 *.log
 *.bak
 .env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# Runtime data
+logs/
