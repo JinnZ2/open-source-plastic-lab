@@ -10,6 +10,7 @@ const int RELAY_POLARITY = 7;
 float targetCurrent = 2.0; // Amps
 unsigned long polarityTimer = 0;
 bool polarityState = false;
+bool treatmentComplete = false;
 
 void setup() {
   pinMode(VOLTAGE_CONTROL, OUTPUT);
@@ -31,8 +32,16 @@ void loop() {
     polarityTimer = millis();
   }
 
-  if (turbidity < 100) {
+  // Log pH for operator monitoring
+  Serial.print("pH: "); Serial.print(ph);
+  Serial.print(" | Turbidity: "); Serial.println(turbidity);
+
+  // Report completion once when turbidity drops below threshold
+  if (turbidity < 100 && !treatmentComplete) {
     Serial.println("Treatment complete!");
+    treatmentComplete = true;
+  } else if (turbidity >= 100) {
+    treatmentComplete = false;
   }
 
   delay(1000);

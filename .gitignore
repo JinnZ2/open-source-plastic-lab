@@ -1,7 +1,3 @@
-# Ignore Python bytecode
-__pycache__/
-*.pyc
-
 # OS and editor cruft
 .DS_Store
 .vscode/

@@ -80,8 +80,8 @@ Change the world, or at least your zip code.
 
 ##  License
 
-This work is public domain under [The Unlicense](https://unlicense.org).  
-Use it. Break it. Improve it. No permission needed.
+This work is licensed under the [MIT License](./LICENSE).
+Use it. Break it. Improve it.
 
 ---
 
