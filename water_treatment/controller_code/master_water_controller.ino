@@ -26,6 +26,7 @@ const int H2O2_PUMP = 10;
 const int TURBIDITY_PIN = A0;
 const int PH_PIN = A1;
 const int CONDUCTIVITY_PIN = A2;
+const int TEMP_PIN = A3;
 const int FLOW_PIN = 2;
 
 volatile int flowPulses = 0;
@@ -77,10 +78,10 @@ void loop() {
       }
       break;
 
-    case 3: // Magnetic separation
+    case 3: // Magnetic separation (timeout after 30 min)
       digitalWrite(PUMP_PINS[1], HIGH);
       digitalWrite(VALVE_PINS[1], HIGH);
-      if (waterData.turbidity < 50) {
+      if (waterData.turbidity < 50 || millis() - stageTimer > 1800000) {
         digitalWrite(PUMP_PINS[1], LOW);
         digitalWrite(VALVE_PINS[1], LOW);
         stage = 4;
@@ -92,6 +93,8 @@ void loop() {
       digitalWrite(PUMP_PINS[2], HIGH);
       digitalWrite(VALVE_PINS[2], HIGH);
       if (millis() - stageTimer > 3600000) {
+        digitalWrite(PUMP_PINS[2], LOW);
+        digitalWrite(VALVE_PINS[2], LOW);
         stage = 5;
         stageTimer = millis();
       }
@@ -104,6 +107,7 @@ void loop() {
       if (millis() - stageTimer > 900000) {
         digitalWrite(UV_LAMP, LOW);
         digitalWrite(H2O2_PUMP, LOW);
+        digitalWrite(PUMP_PINS[3], LOW);
         stage = 6;
         stageTimer = millis();
       }
@@ -127,6 +131,7 @@ void updateSensors() {
   waterData.turbidity = analogRead(TURBIDITY_PIN);
   waterData.ph = analogRead(PH_PIN) * 0.0137 + 3.5;
   waterData.conductivity = analogRead(CONDUCTIVITY_PIN) * 2.0;
+  waterData.temperature = analogRead(TEMP_PIN) * 0.48828; // LM35: 10mV/°C
 
   if (millis() - lastFlowCheck > 1000) {
     waterData.flowRate = flowPulses * 2.25;

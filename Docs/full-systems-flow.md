@@ -1,4 +1,4 @@
-##process overview
+## Process Overview
 
 [ULTRASONIC CLEANING TANK]
 ↓
