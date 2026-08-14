@@ -13,8 +13,10 @@ __pycache__/
 *.pyc
 *.pyo
 *.egg-info/
-dist/
-build/
+# Anchored to the repo root on purpose. An unanchored `build/` also matches
+# `models/build/`, which silently swallowed that package once already.
+/dist/
+/build/
 
 # Runtime data
 logs/

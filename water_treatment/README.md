@@ -212,11 +212,39 @@ H₂O₂ + UV → 2·OH (hydroxyl radicals)
 
 ### Daily Value Recovery (from 1000L wash water)
 
-- Microplastics: 10-50kg @ $100-500/kg = **$1,000-25,000**
-- Metal sludge: 5-10kg @ $0.50-2/kg = **$2.50-20**
-- Bioelectricity: 0.5-2 kWh = **$0.05-0.20**
-- Water savings: 1000L = **$1-5**
-- **Total daily value: $1,003-25,025**
+> **Corrected.** The figures that used to sit here were overstated by 10× —
+> falsified by this document's own premise. The original numbers, the
+> arithmetic that broke them, and why it matters are preserved in
+> [`../legacy/water-value-projections.md`](../legacy/water-value-projections.md)
+> ([L-004](../legacy/README.md#l-004--microplastic-recovery-of-1050-kg-per-1000-l)).
+
+Derived from the 10–50 g/kg figure at the top of this page, and 1000 L washing
+100 kg of plastic. Check the multiplication yourself — the last person didn't:
+
+```
+Microplastic mass    100 kg × 10–50 g/kg        =  1 – 5 kg
+Microplastic value   1–5 kg × $100–500/kg  [!]  =  $100 – $2,500
+Metal sludge         5–10 kg × $0.50–2/kg       =  $2.50 – $20
+Bioelectricity       0.5–2 kWh × ~$0.10/kWh     =  $0.05 – $0.20
+Water reuse          1000 L                     =  $1 – $5
+                                                  ────────────────
+Total                                             $104 – $2,525
+```
+
+**`[!]` — the price is an assumption, not a rate.** No source anywhere in this
+repo establishes that a buyer pays $100–500/kg for recovered mixed microplastic
+concentrate, and none was found. That single unsourced number carries almost
+the entire total above. Correcting the arithmetic made the figure smaller; it
+did not make it true.
+
+**Before you build this for the money, get one quote from one real buyer.** If
+no buyer exists, that is the most useful thing anyone could add to this repo —
+record it in [`../legacy/README.md`](../legacy/README.md) either way.
+
+The water train still earns its place on non-revenue grounds: closed-loop
+water reuse, no discharge, and recovered microplastic that feeds the pyrolysis
+and carbon systems instead of the creek. Those benefits are real whether or not
+the concentrate ever sells.
 
 ### Control Integration
 
@@ -232,18 +260,37 @@ See [`controller_code/master_water_controller.ino`](controller_code/master_water
 1. **Collect** 100kg forest plastics
 1. **Clean** using 1000L water
 1. **Process** into:
-- 80kg filament ($1,600-4,000)
-- 10kg unsuitable → pyrolysis oil ($5-15)
-- 10kg microplastics from wash → concentrate ($1,000-5,000)
+- 60-80kg filament ($1,200-4,000 *at unverified prices —* [L-007](../legacy/README.md#l-007--recycled-filament-at-2050kg))
+- 10-20kg unsuitable → pyrolysis oil ($5-15)
+- 1-5kg microplastics from wash → concentrate ($100-2,500 *at an unsourced price*)
+- the remainder: dirt, moisture, PVC rejects, extruder purge — **weigh this**
 1. **Treat** water for reuse + recover materials
-1. **Total value:** $2,605-9,015 from 100kg “trash”
+1. **Projected value:** $1,305-6,515 from 100kg “trash” — *never measured*
+
+> The original version of this chain balanced to exactly 100 kg out, with zero
+> loss to contamination, moisture, or purge, and claimed 10 kg of microplastic
+> from a premise that caps it at 5 kg. Both are fixed above. What has *not*
+> been fixed is that no one has ever weighed a real batch — every number here
+> is still arithmetic, not measurement. One scale and one afternoon closes it.
 
 ## Key Insights
 
-**Water treatment isn’t a cost - it’s another profit center!** By adding these systems:
+**Water treatment might not be a cost — it might be another profit center.** The
+"might" is load-bearing and it is new. This section used to assert it flatly,
+on the strength of a price nobody has checked. What holds up regardless of
+whether the concentrate ever sells:
 
-1. **Close the loop** - No waste water discharge
-1. **Capture microplastics** - Highest value per kg
-1. **Generate power** - Offset energy costs
-1. **Meet regulations** - Often required anyway
-1. **Marketing advantage** - “Zero discharge facility”
+1. **Close the loop** - No waste water discharge. Solid.
+1. **Capture microplastics** - They stop going in the creek, and they feed the
+   pyrolysis and carbon systems. Whether they *sell* is [open](../legacy/README.md#open-unknowns-collected).
+1. **Generate power** - The bio cell is real but small; 10-50 mW/m² runs
+   sensors, not heaters. Check it against `python -m models.build.power_calculator`.
+1. **Meet regulations** - Often required anyway, and this genuinely does not
+   depend on any price holding up.
+1. **It runs off-grid** - Measured, not assumed: the whole water train plus
+   controls draws ~0.4 kWh/day, about a 123 W array. The thermal systems are
+   the ones that don't fit on solar
+   ([L-006](../legacy/README.md#l-006--off-grid-ready-unquantified)).
+
+The environmental case for this system never depended on the revenue case. It
+is worth building either way — just build it knowing which is which.
