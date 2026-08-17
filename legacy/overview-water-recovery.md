@@ -1,5 +1,17 @@
 # Overview — Water Recovery & Microplastic Mining System
 
+> **Ledger entry:** [L-003](./README.md#l-003--docsoverviewmd-as-the-water-system-summary)
+> **Status:** superseded
+> **Was:** `Docs/overview.md`
+> **Superseded by:** [`../water_treatment/README.md`](../water_treatment/README.md)
+>
+> Same four modules, less detail, and — the reason it was retired — a revenue
+> figure that disagreed with the live guide's for the same quantity. Its
+> "$1,000–5,000 per 1000L" and the guide's "$1,000–25,000" were both wrong;
+> see [L-004](./README.md#l-004--microplastic-recovery-of-1050-kg-per-1000-l).
+> Kept for the framing in the line below, which is the clearest statement of
+> the idea anywhere in the repo.
+
 You’re not just cleaning water — you’re **mining resources** from it.
 
 This system turns the “wastewater” from forest plastic cleaning into a valuable resource stream, using four integrated modules:

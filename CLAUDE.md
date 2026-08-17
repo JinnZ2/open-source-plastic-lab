@@ -15,6 +15,7 @@ open-source-plastic-lab/
 ├── LICENSE                                # MIT License
 ├── .gitignore
 ├── Docs/
+│   ├── method.md                          # Falsification loop + how to file a legacy entry
 │   ├── quick-start.md                     # 1-day electrocoagulation build
 │   ├── process-flow-diagram.md            # ASCII process flow diagram
 │   ├── full-systems-flow.md               # Complete system overview with sensor stack
@@ -22,8 +23,12 @@ open-source-plastic-lab/
 │   ├── ec-wiring.md                       # Electrocoagulation wiring diagram
 │   ├── magnetic-separator-wiring.md       # Magnetic separator design
 │   ├── oxidation-reactor-wiring.md        # Advanced oxidation reactor wiring
-│   ├── overview.md                        # Water recovery system summary
 │   └── build-out-materials.md             # Bill of materials with costs
+├── legacy/                                # Superseded claims — kept, never deleted
+│   ├── README.md                          # The precedence ledger (L-001 … L-007)
+│   ├── overview-water-recovery.md         # Was Docs/overview.md (L-003)
+│   ├── water-value-projections.md         # Original 10x-overstated economics (L-004)
+│   └── business-scaling-plan.md           # Scale-to-business plan, out of scope (L-005)
 ├── models/                                # Python planning & simulation tools
 │   ├── measure/
 │   │   ├── sensor_logger.py               # Log Arduino sensor data to CSV via serial
@@ -118,7 +123,28 @@ Run any model with: `python -m models.<category>.<module> --help`
 - **Quick build:** `Docs/quick-start.md` (electrocoagulation in 1 day)
 - **Water treatment:** `water_treatment/README.md`
 - **Safety:** `Docs/safety.md` (read before any build work)
+- **Method:** `Docs/method.md` (how claims are tested and retired)
+- **Precedence ledger:** `legacy/README.md` (what was falsified, and what's still unknown)
 - **Python models:** `python -m models.<category>.<module> --help`
+
+## The Falsification Loop
+
+This repo treats its own documentation as a set of testable claims:
+
+```
+hypothesize → run → result → falsified? → edit the claim
+                                 ↓
+                       search for the unknowns → rerun
+```
+
+When a claim breaks, the old wording moves to `legacy/` with an `L-NNN` ledger
+entry recording what was claimed, what killed it, what replaced it, and what
+remains unknown. The live doc gets the correction and a link back. **Nothing is
+deleted — precedence carries.** Full procedure in `Docs/method.md`.
+
+Three statuses: `falsified` (tested, failed), `superseded` (replaced or
+re-scoped, not disproven), `unverified` (never tested, demoted from assertion
+to assumption).
 
 ## Build Plan Structure (30 Days)
 
@@ -143,6 +169,28 @@ This project involves **high voltage, chemicals, and thermal hazards**. Always r
 - **Respect the modular design.** Each system should work independently.
 - **Documentation uses ASCII diagrams** — maintain this style rather than introducing images or external tools.
 - **Cost-consciousness matters.** Suggestions should favor salvaged/cheap components.
-- **Off-grid compatibility.** All systems should remain compatible with solar/wind power.
+- **Off-grid compatibility.** The water treatment train and controls run off-grid
+  (~0.4 kWh/day). The thermal systems do not, at this budget (~7.8 kWh/day total,
+  needing ~2.6 kW of array). Don't assert "solar-powered" for the whole lab —
+  see `legacy/README.md` L-006. Check sizing with `models/build/power_calculator.py`.
 - **File naming:** Use lowercase kebab-case for docs, snake_case for Arduino sketches.
 - **Always add timeout fallbacks** for sensor-gated stage transitions in controller code.
+- **Scope is personal sufficiency, not business.** The README Scope Statement
+  (2025-09-02) rules out scaling, commercialization, and mass production. Don't
+  reintroduce growth framing — that material lives in `legacy/business-scaling-plan.md`.
+
+### Claims, numbers, and honesty
+
+- **Verify before asserting.** If a doc says a file exists, `ls` it. L-001 is a
+  package that three documents described and no commit contained — including a
+  commit message listing files the commit didn't have.
+- **Re-derive numbers from their stated premises** before repeating them
+  downstream. L-004 is a 10× revenue error that any single multiplication would
+  have caught, sitting on the same page as the premise that falsified it.
+- **Never silently correct.** File the ledger entry. A quiet fix destroys the
+  record, and the record is the point.
+- **Distinguish "unsourced" from "wrong."** Mark unverified numbers
+  `unverified` rather than deleting them or inventing citations. Do not add
+  prices, yields, or efficiencies you cannot source.
+- **Consistency is not correctness.** A document can be perfectly self-consistent
+  and still rest on a number nobody measured. Ask "who measured this?" separately.

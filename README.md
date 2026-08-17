@@ -61,15 +61,66 @@ Run any model with: `python -m models.<category>.<module> --help`
 
 ---
 
+##  How This Repo Handles Being Wrong
+
+Every number here is a claim, and claims get tested. When one breaks, the old
+wording doesn't get quietly deleted — it moves to [`legacy/`](./legacy/README.md)
+with its cause of death attached, and the live doc gets the correction plus a
+link back.
+
+```
+hypothesize → run → result → falsified? → edit the claim
+                                             ↓
+                                   search for the unknowns
+                                             ↓
+                                          rerun
+```
+
+- **[`Docs/method.md`](./Docs/method.md)** — the loop, and how to file an entry
+- **[`legacy/README.md`](./legacy/README.md)** — the precedence ledger: what
+  was claimed, what killed it, what's still unknown
+
+Seven entries so far. A units error that overstated revenue 10×. A `.gitignore`
+pattern that silently ate a whole Python package. An "off-grid" claim nobody
+had ever put a number to. **Precedence carries** — a claim that was tested and
+failed is worth more than one nobody ever checked, so none of it gets thrown
+away.
+
+---
+
 ##  Potential Output
 
-| Product           | Daily Output | Est. Value |
-|------------------|--------------|------------|
-| 3D filament       | 2–5 kg       | $40–250    |
-| Recycled fuel oil | 5–10 liters  | $5–15      |
-| Molded goods      | 10–20 units  | $50–200    |
-| Chemicals         | 1–2 kg       | $2–10      |
-| Carbon            | 0.5–1 kg     | $5–50      |
+**These are projections. None have been measured.** They are honest guesses,
+kept because a guess you can test beats no target at all — but do not plan
+around them until someone has weighed a real batch.
+
+| Product           | Daily Output | Est. Value | Verified? |
+|------------------|--------------|------------|-----------|
+| 3D filament       | 2–5 kg       | $40–250    | ✗ price untested ([L-007](./legacy/README.md#l-007--recycled-filament-at-2050kg)) |
+| Recycled fuel oil | 5–10 liters  | $5–15      | ✗ |
+| Molded goods      | 10–20 units  | $50–200    | ✗ |
+| Chemicals         | 1–2 kg       | $2–10      | ✗ |
+| Carbon            | 0.5–1 kg     | $5–50      | ✗ |
+
+When your build disagrees with this table, **your numbers win** — write them
+down. [`Docs/method.md`](./Docs/method.md) explains how; [`legacy/`](./legacy/README.md)
+is where the results that already broke live.
+
+---
+
+##  Power Reality
+
+"Off-grid-ready" now means something specific, because it finally got sized:
+
+| Running | Daily draw | Array needed | Off-grid? |
+|---------|-----------|--------------|-----------|
+| Water treatment + controls | 0.4 kWh | ~123 W | Yes — one panel |
+| All seven systems | 7.8 kWh | ~2.6 kW + 35 kWh battery | Not on this budget |
+
+The thermal systems — extruder, pyrolysis, press, chemical, plasma — are
+resistive heat. Run them on grid, generator, or daylight batches. Size your own
+site with `python -m models.build.power_calculator --help`.
+See [L-006](./legacy/README.md#l-006--off-grid-ready-unquantified).
 
 ---
 

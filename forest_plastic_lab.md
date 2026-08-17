@@ -4,7 +4,7 @@
 
 ### Overview: The Integrated System
 
-Building all 6 systems creates a complete plastic processing lab where each system feeds the others:
+Building all 7 systems creates a complete plastic processing lab where each system feeds the others:
 
 - **Cleaning station** → prepares all plastics
 - **Sorter/shredder** → feeds all other systems
@@ -15,8 +15,21 @@ Building all 6 systems creates a complete plastic processing lab where each syst
 - **Mold press** → uses any plastic type
 
 **Total investment:** $1,800-2,750
-**Potential daily revenue:** $100-500
+**Potential daily revenue:** $100-500 — *projected, never measured. See [`Docs/method.md`](./Docs/method.md).*
 **Space needed:** Single garage or 200 sq ft
+
+> **Scope.** This is a personal-sufficiency build, not a business plan. The
+> growth trajectory this guide originally ended with — 50 kg/day, then a ton,
+> then employees — was moved to
+> [`legacy/business-scaling-plan.md`](./legacy/business-scaling-plan.md) when
+> the project was re-scoped. It is preserved in full, and still a fine starting
+> point if you're forking toward a co-op or community shop.
+>
+> **Every number below is a hypothesis.** Costs, yields, temperatures, and
+> revenues are estimates that have not been verified against a working build.
+> Treat them as starting points to test, not specifications to trust — and when
+> your build disagrees with them, that result is worth more than the estimate
+> was. [`legacy/README.md`](./legacy/README.md) is where those results go.
 
 ## Week 1: Foundation Systems
 
@@ -235,21 +248,26 @@ Building all 6 systems creates a complete plastic processing lab where each syst
 - Product quality
 - Optimal parameters
 
-### Days 26-27: Market Development
+### Days 26-27: Document What Actually Worked
 
-- Create product samples
-- Photo document everything
-- Set up online presence
-- Contact local buyers
-- Price products competitively
+- Create product samples from each pathway
+- Photo document everything, including the failures
+- Write down measured yields next to the estimates in this guide
+- Note where they disagree — that gap is your real data
+- File anything falsified in [`legacy/README.md`](./legacy/README.md)
 
-### Days 28-30: Launch!
+*(The original market-development steps for this stretch — online presence,
+contacting buyers, competitive pricing — moved to
+[`legacy/business-scaling-plan.md`](./legacy/business-scaling-plan.md) with the
+rest of the commercialization plan.)*
 
-- Process first full batch
-- Calculate real profits
-- Identify bottlenecks
-- Plan expansion
-- Share success story!
+### Days 28-30: First Full Batch
+
+- Process one full batch end to end
+- Measure real inputs and outputs — weigh every stream
+- Identify the bottleneck (`python -m models.design.flow_simulator`)
+- Meter actual power draw and rerun `python -m models.build.power_calculator`
+- Record the numbers, especially the ones that broke your assumptions
 
 ## Integrated Workspace Layout
 
@@ -385,54 +403,19 @@ VENTILATION FAN
 - Better material mixing
 - Check mold alignment
 
-## Scaling to Business
+## Scaling Beyond This Guide
 
-### Month 2-3 Goals
+This build plan stops at one working garage lab, because that is what it is
+scoped to. The growth trajectory it used to end with — 50 kg/day, 200 kg/day,
+1 ton/day, employees, multiple locations — along with the Community Impact
+Model projecting acres cleaned and jobs created, now lives in
+[`legacy/business-scaling-plan.md`](./legacy/business-scaling-plan.md).
 
-- Process 50kg/day
-- Establish supply chain
-- Hire part-time help
-- Apply for green grants
-- Create brand identity
-
-### Month 4-6 Goals
-
-- Process 200kg/day
-- Automated systems
-- Retail partnerships
-- B2B chemical sales
-- Educational workshops
-
-### Year 1 Vision
-
-- 1 ton/day processing
-- 5-10 employees
-- Multiple locations
-- Product certification
-- Industry recognition
-
-## Community Impact Model
-
-### Environmental Benefits
-
-- Forests cleaned: 10-50 acres/month
-- Plastic diverted: 1-5 tons/month
-- Carbon offset: 2-10 tons CO2/month
-- Wildlife protected: Immeasurable
-
-### Social Benefits
-
-- Jobs created: 2-10 locally
-- Skills taught: 50+ people/year
-- Youth engaged: School programs
-- Community pride: Clean forests
-
-### Economic Benefits
-
-- Revenue generated: $3k-15k/month
-- Local spending: 80% of revenue
-- Tax contribution: Business + sales
-- Property values: Increase with clean environment
+Nothing in it was disproven. It was put out of scope by the project's own
+Scope Statement, which prioritizes personal sufficiency and autonomy over
+growth. It is kept intact, with notes on what you would need to measure first
+if you do want to take it further. See
+[L-005](./legacy/README.md#l-005--the-scale-to-business-trajectory).
 
 ## Resources and Support
 
@@ -466,9 +449,14 @@ VENTILATION FAN
 
 ## Your Next Steps
 
-1. **Today:** Order materials for cleaning station
+1. **Today:** Read [`Docs/safety.md`](./Docs/safety.md), then order materials for the cleaning station
 1. **This week:** Start collecting forest plastics
 1. **Next week:** Complete first 3 systems
-1. **This month:** Process first $100 of products
-1. **Next month:** Scale to daily production
-1. **This year:** Build thriving green business
+1. **This month:** Run your first full batch and *measure* it
+1. **Ongoing:** When your numbers disagree with this guide's, write down yours
+
+That last one is not filler. Every figure in this document is an untested
+estimate, and the first person to replace one with a measurement makes this
+guide permanently better. The method is in [`Docs/method.md`](./Docs/method.md);
+the record of what has already been tested and broken is in
+[`legacy/README.md`](./legacy/README.md).
