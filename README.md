@@ -147,7 +147,7 @@ Change the world, or at least your zip code.
 
 ##  License
 
-This work is licensed under the [MIT License](./LICENSE).
+This work is licensed under the [CC0 1.0 Universal](./LICENSE).
 Use it. Break it. Improve it.
 
 ---
