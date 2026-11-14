@@ -1,3 +1,6 @@
+> Read first: [READING_PROTOCOL.md](READING_PROTOCOL.md) (how to read this repo).
+> Map, not prescription. Errors are data. Check it. Built for the need, revisable.
+
 #  Open-Source Plastic Lab  
 *An off-grid-ready, low-cost plastic processing facility designed for innovation, forest tinkerers, and community-scale sustainability.*
 
